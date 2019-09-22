@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "279623753432",
+    "firebase_url": "https://vconnect-37753.firebaseio.com",
+    "project_id": "vconnect-37753",
+    "storage_bucket": "vconnect-37753.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279623753432:android:22138e7c65790a5fbec1ad",
+        "android_client_info": {
+          "package_name": "com.shadylabs.vconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279623753432-59vab6tk31016irlut737ulf8tb9ot8a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadylabs.vconnect",
+            "certificate_hash": "beac365394d4f2a0ed6d2505d9cecb7c02473c1b"
+          }
+        },
+        {
+          "client_id": "279623753432-qbt93lo9f9so3q804ckm6129s1rekic5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0v3qR3BhxoKRVpkyqm6dEjvq91YVNAns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279623753432-qbt93lo9f9so3q804ckm6129s1rekic5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
