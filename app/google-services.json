@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:279623753432:android:f74d6995f34d7cf2bec1ad",
+        "android_client_info": {
+          "package_name": "com.example.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279623753432-fodr9j0qq3k9vkn0o8ovsam6890dc5iq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.auth",
+            "certificate_hash": "1aab4aca475bb8d6894e0d33693b93fe9871100d"
+          }
+        },
+        {
+          "client_id": "279623753432-qbt93lo9f9so3q804ckm6129s1rekic5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0v3qR3BhxoKRVpkyqm6dEjvq91YVNAns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279623753432-qbt93lo9f9so3q804ckm6129s1rekic5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:279623753432:android:22138e7c65790a5fbec1ad",
         "android_client_info": {
           "package_name": "com.shadylabs.vconnect"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "279623753432-buf3537rnk0ggq26i6ihl3183vlpi7ua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadylabs.vconnect",
+            "certificate_hash": "1aab4aca475bb8d6894e0d33693b93fe9871100d"
+          }
+        },
         {
           "client_id": "279623753432-59vab6tk31016irlut737ulf8tb9ot8a.apps.googleusercontent.com",
           "client_type": 1,

@@ -14,7 +14,9 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string name="facebook_app_id">2463074723929331</string>
-    <string name="fb_login_protocol_scheme">fb2463074723929331</string>
+    <string name="facebook_application_id">2463074723929331</string>
+    <string name="facebook_login_protocol_scheme">fb2463074723929331</string>
+    <string name="aao_connect_kare">Aao Connect Kare!</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>

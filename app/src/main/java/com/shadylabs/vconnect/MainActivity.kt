@@ -1,22 +1,29 @@
 package com.shadylabs.vconnect
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.MenuItem
+import android.util.Base64
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.gms.common.util.IOUtils.toByteArray
-import android.content.pm.PackageManager
-import android.content.pm.PackageInfo
-import android.util.Base64
-import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -24,11 +31,21 @@ import java.security.NoSuchAlgorithmException
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
+    var REQUESRT_CODE = 149
+    lateinit var signOutButton: Button
+    lateinit var providers: List<AuthUI.IdpConfig>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        providers = listOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.PhoneBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+            AuthUI.IdpConfig.FacebookBuilder().build()
+        )
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -37,16 +54,50 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        signOutButton = findViewById(R.id.btn_sign_out)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        getHashCode()
+//        getHashCode()
 
+        showSignInOptions()
         navView.setNavigationItemSelectedListener(this)
     }
+
+    private fun showSignInOptions() {
+        signOutButton.isEnabled = false
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setIsSmartLockEnabled(false)
+                .setAvailableProviders(
+                    providers
+                ).build(), REQUESRT_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUESRT_CODE) {
+
+            var idpResponse = IdpResponse.fromResultIntent(data)
+            if (resultCode == Activity.RESULT_OK) {
+                val firebaseUser = FirebaseAuth.getInstance().currentUser
+                Toast.makeText(this, firebaseUser?.email, Toast.LENGTH_LONG).show()
+                signOutButton.isEnabled = true
+            } else {
+                Toast.makeText(this, idpResponse?.error?.message, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 
     @SuppressLint("PackageManagerGetSignatures")
     private fun getHashCode() {
@@ -120,5 +171,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun SignOutClicked(view: View) {
+
+        AuthUI.getInstance().signOut(this)
+            .addOnCompleteListener(OnCompleteListener { showSignInOptions() })
     }
 }
